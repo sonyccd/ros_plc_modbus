@@ -127,16 +127,17 @@ include_directories(
 # add_dependencies(plc_modbus_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(plc_modbus_node_node src/plc_modbus_node_node.cpp)
+add_executable(ros_plc_modbus src/ros_plc_modbus.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(plc_modbus_node_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(plc_modbus_node_node
-#   ${catkin_LIBRARIES}
-# )
+ target_link_libraries(ros_plc_modbus
+   ${catkin_LIBRARIES}
+   modbus
+ )
 
 #############
 ## Install ##
