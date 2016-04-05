@@ -69,11 +69,14 @@ plc_modbus_manager::plc_modbus_manager() {
     while(ros::ok()){
         regs_val.data.clear();
         coils_val.data.clear();
-            //test
+
         for(int i=0;i<regs_addr.size();i++){
-            if(modbus_read_registers(plc, regs_addr.at(i), 1, (uint16_t *) regs_val.data.at(i)) == -1){
+            uint16_t temp[1]={0};
+            if(modbus_read_registers(plc, regs_addr.at(i), 1, temp) == -1){
                 ROS_ERROR("Unable to read reg addr:%d",regs_addr.at(i));
                 ROS_ERROR("%s",modbus_strerror(errno));
+            }else{
+                regs_val.data.push_back(temp[0]);
             }
         }
         if(regs_val.data.size()>0) {
