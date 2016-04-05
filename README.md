@@ -1,5 +1,5 @@
 # ros_plc_modbus
-ROS driver for modbus for use with PLCs or anything else modbus
+ROS driver for modbus for use with PLCs or anything else modbus.
 
 ## Before you begin
 You will need to install the c++ mobus library from [here](http://libmodbus.org/download/)  You can either use the prebuilt ones for Ubuntu or install from source, I would recomend installing the latest from source.
@@ -15,6 +15,10 @@ catkin_make
 source devel/setup.bash
 roslaunch plc_modbus_node example.launch
 ```
+
+You give a list of address to be used for coils and registers.  When you read or write back over the topics you will do so with an array that is mapped to the address you gave in the parameters.  
+Example:  
+If you have a set of address [3,56,32,4,7] then when you read from the topic or write you will give an array such that the first element maps to address 3 and the second to 56 and so on. You can not change the address once the node is started, for now.
 
 ##Parameters
 
