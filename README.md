@@ -15,3 +15,9 @@ catkin_make
 source devel/setup.bash
 roslaunch plc_modbus_node example.launch
 ```
+
+##How it works
+
+##What is Modbus?
+![Alt Text](http://www.controlsystemworks.com/i/Features/Modbus.jpg)
+>Modbus is a serial communications protocol originally published by Modicon (now Schneider Electric) in 1979 for use with its programmable logic controllers (PLCs). Modbus enables communication among many devices connected to the same network, for example a system that measures temperature and humidity and communicates the results to a computer. 
