@@ -16,18 +16,33 @@ source devel/setup.bash
 roslaunch plc_modbus_node example.launch
 ```
 
-##How it works
+##Parameters
+
+|Parameter|Default|Definition|
+|-----|----------|-------|
+|ip|192.168.0.100|IP address of the modbus device|
+|port|502|Port for communication with the modbus device|
+|regs_addr|NULL|An array of register addresses to be written and read from|
+|coils_addr|NULL|An array of coil addresses to be written and read from|
 
 ##Topics
-###Subscribed
-/modbus/regs_read [(std_msgs/UInt16MultiArray)](http://docs.ros.org/api/std_msgs/html/msg/UInt16MultiArray.html)
-This is the current 
-###Published
-/odom [(nav_msgs/Odometry)](http://docs.ros.org/api/nav_msgs/html/msg/Odometry.html)  
-Odometry output from the mobile base.
 
+###Subscribed
+
+/modbus/regs_read [(std_msgs/UInt16MultiArray)](http://docs.ros.org/api/std_msgs/html/msg/UInt16MultiArray.html)  
+This is the current value of the registers.  
+/modbus/coils_read [(std_msgs/ByteMultiArray)](http://docs.ros.org/api/std_msgs/html/msg/ByteMultiArray.html)  
+This is the current value of the coils (TRUE or FALSE).
+
+###Published
+
+/modbus/regs_write [(std_msgs/UInt16MultiArray)](http://docs.ros.org/api/std_msgs/html/msg/UInt16MultiArray.html)  
+What to set the given register address to.  
+/modbus/coils_write [(std_msgs/ByteMultiArray)](http://docs.ros.org/api/std_msgs/html/msg/ByteMultiArray.html)  
+What to set the given coil address to (TRUE or FALSE).  
 
 ##What is Modbus?
+
 ![Alt Text](http://www.controlsystemworks.com/i/Features/Modbus.jpg)
 >Modbus is a serial communications protocol originally published by Modicon (now Schneider Electric) in 1979 for use with its programmable logic controllers (PLCs). Modbus enables communication among many devices connected to the same network, for example a system that measures temperature and humidity and communicates the results to a computer. In simple terms, it is a method used for transmitting information over serial lines between electronic devices. The device requesting the information is called the Modbus Master and the devices supplying information are Modbus Slaves. In a standard Modbus network, there is one Master and up to 247 Slaves, each with a unique Slave Address from 1 to 247. The Master can also write information to the Slaves.
 

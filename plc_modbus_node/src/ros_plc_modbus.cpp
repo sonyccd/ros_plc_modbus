@@ -39,8 +39,8 @@ plc_modbus_manager::plc_modbus_manager() {
     coils_read = node.advertise<std_msgs::ByteMultiArray>("modbus/coils_read",100);
     coils_write = node.subscribe<std_msgs::ByteMultiArray>("modbus/coils_write",100, &plc_modbus_manager::coils_callBack, this);
 
-    node.param<std::string>("modbus/ip",ip_address,"192.168.0.100");
-    node.param("modbus/port",port,502);
+    node.param<std::string>("plc_modbus_node/ip",ip_address,"192.168.0.100");
+    node.param("plc_modbus_node/port",port,502);
 
     if(!node.getParam("plc_modbus_node/regs_addr",regs_addr)){
         ROS_WARN("No reg addrs given!");
