@@ -64,7 +64,7 @@ plc_modbus_manager::plc_modbus_manager() {
         ROS_INFO("Connection to modbus device established");
     }
 
-    ros::Rate loop_rate(10);
+    ros::Rate loop_rate(30);
 
     while(ros::ok()){
         regs_val.data.clear();
@@ -86,7 +86,7 @@ plc_modbus_manager::plc_modbus_manager() {
         for(int i=0;i<coils_addr.size();i++){
             uint8_t temp[1]={0};
             if(modbus_read_bits(plc, coils_addr.at(i), 1, temp)==-1){
-                ROS_ERROR("Unable to read coil addr:%d",regs_addr.at(i));
+                ROS_ERROR("Unable to read coil addr:%d",coil_addr.at(i));
                 ROS_ERROR("%s",modbus_strerror(errno));
             }else{
                 coils_val.data.push_back(temp[0]);
