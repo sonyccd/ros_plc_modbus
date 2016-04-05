@@ -3,7 +3,7 @@
   <name>plc_modbus_node</name>
   <version>0.0.1</version>
   <description>The plc_modbus_node package</description>
-  <maintainer email="bwbazemore@uga.edu">brad</maintainer>
+  <maintainer email="bwbazemore@uga.edu">Brad Bazemore</maintainer>
   <license>BSD</license>
 
 
