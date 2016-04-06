@@ -1,5 +1,5 @@
 # ros_plc_modbus
-ROS driver for modbus for use with PLCs or anything else modbus.
+ROS driver for modbus for use with PLCs or anything else modbus. Only tested on ROS Indigo.
 
 ## Before you begin
 You will need to install the c++ mobus library from [here](http://libmodbus.org/download/)  You can either use the prebuilt ones for Ubuntu or install from source, I would recomend installing the latest from source.
