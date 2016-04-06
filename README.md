@@ -26,6 +26,7 @@ If you have a set of address [3,56,32,4,7] then when you read from the topic or 
 |-----|----------|-------|
 |ip|192.168.0.100|IP address of the modbus device|
 |port|502|Port for communication with the modbus device|
+|spin_rate|30|The rate ROS will refresh the coil and register read topics|
 |regs_addr|NULL|An array of register addresses to be written and read from|
 |coils_addr|NULL|An array of coil addresses to be written and read from|
 

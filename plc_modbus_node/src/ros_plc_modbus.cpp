@@ -28,6 +28,7 @@ private:
 
     std::string ip_address;
     int port;
+    int spin_rate;
 
     void regs_callBack(const std_msgs::UInt16MultiArray::ConstPtr &regs_data);
 
@@ -46,6 +47,7 @@ plc_modbus_manager::plc_modbus_manager() {
 
     node.param<std::string>("plc_modbus_node/ip", ip_address, "192.168.0.100");
     node.param("plc_modbus_node/port", port, 502);
+    node.param("plc_modbus_node/spin_rate",spin_rate,30);
 
     if (!node.getParam("plc_modbus_node/regs_addr", regs_addr)) {
         ROS_WARN("No reg addrs given!");
@@ -69,7 +71,7 @@ plc_modbus_manager::plc_modbus_manager() {
         ROS_INFO("Connection to modbus device established");
     }
 
-    ros::Rate loop_rate(30);
+    ros::Rate loop_rate(spin_rate);
 
     while (ros::ok()) {
         regs_val.data.clear();
