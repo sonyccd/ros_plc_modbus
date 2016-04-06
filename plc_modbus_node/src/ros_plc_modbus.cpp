@@ -112,28 +112,34 @@ plc_modbus_manager::plc_modbus_manager() {
 
 void plc_modbus_manager::regs_callBack(const std_msgs::UInt16MultiArray::ConstPtr &regs_data) {
     if (regs_data->data.size() != regs_addr.size()) {
-        ROS_ERROR("Number of regs to write to number of values provided do not match");
+        ROS_ERROR("%d registers to write but only %d given!", regs_addr.size(), regs_data->data.size());
         return;
     }
     for (int i = 0; i < regs_data->data.size(); i++) {
         ROS_DEBUG("regs_out[%d]:%u", i, regs_data->data.at(i));
-        if (modbus_write_registers(plc, regs_addr.at(i), 1, (const uint16_t *) regs_data->data.at(i)) == -1) {
+        uint16_t temp[1] = {regs_data->data.at(i)};
+        if (modbus_write_registers(plc, regs_addr.at(i), 1, temp) == -1) {
             ROS_ERROR("Modbus reg write failed at addr:%d with value:%u", regs_addr.at(i), regs_data->data.at(i));
             ROS_ERROR("%s", modbus_strerror(errno));
+        } else {
+            ROS_INFO("Modbus register write at addr:%d with value:%u", regs_addr.at(i), regs_data->data.at(i));
         }
     }
 }
 
 void plc_modbus_manager::coils_callBack(const std_msgs::ByteMultiArray::ConstPtr &coils_data) {
     if (coils_data->data.size() != coils_addr.size()) {
-        ROS_ERROR("Number of coils to write to number of values provided do not match");
+        ROS_ERROR("%d coils to write but %d given!", coils_addr.size(), coils_data->data.size());
         return;
     }
     for (int i = 0; i < coils_data->data.size(); i++) {
         ROS_DEBUG("regs_out[%d]:%u", i, coils_data->data.at(i));
-        if (modbus_write_bits(plc, coils_addr.at(i), 1, (const uint8_t *) coils_data->data.at(i)) == -1) {
+        uint8_t temp[1] = {coils_data->data.at(i)};
+        if (modbus_write_bits(plc, coils_addr.at(i), 1, temp) == -1) {
             ROS_ERROR("Modbus coil write failed at addr:%d with value:%u", coils_addr.at(i), coils_data->data.at(i));
             ROS_ERROR("%s", modbus_strerror(errno));
+        } else {
+            ROS_INFO("Modbus coil write at addr:%d with value:%u", coils_addr.at(i), coils_data->data.at(i));
         }
     }
 }
